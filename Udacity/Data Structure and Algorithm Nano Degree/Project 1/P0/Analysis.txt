@@ -1,0 +1,72 @@
+1. Task0
+    Worst Case Time Complexity: O(1)
+    Explanation: The code runs in the same number of lines run regardless size of texts list and calls list
+
+2. Task1
+    Worst Case Time Complexity: O(n^2) (simplification )
+    Explanation:
+        1. First, we look at the two for loops. Increasing the size of "texts" or "calls" list will also increase linearly the number of lines run inside the first for loop or the second for loop respectively. So, the time complexity here is O(n)
+        2. Next, inside the two for loops, the only thing we use is set add() method. According to https://wiki.python.org/moin/TimeComplexity , the time complexity when adding item to set is O(n) in worst case.
+        So, the time complexity in this case is O(n) * O(n) = O(n^2) in worst case
+
+2. Task2
+    Worst Case Time Complexity: O(n^2) (simplification )
+    Explanation:
+        Similar to Task1, we have
+        1. For loop: The time complexity is O(n)
+        2. Inside the for loop, the time complexity of dictionary get item and set item are O(n) in worst case ( https://wiki.python.org/moin/TimeComplexity)
+        => the time complexity is O(n) * O(1) = O(n) in average case and O(n) * O(n) = O(n^2) in worst case
+
+3. Task3
+    Worst Case Time Complexity: O(n^2)
+    Explanation:
+
+            call_set = set()
+            call_data = [0, 0, 0]  # fixed , mobile, telemarketers
+O(n)        for call in calls:
+                incoming = call[0]
+                answering = call[1]
+
+                if incoming[0:5] == "(080)":
+
+                    if answering[0] == "(":  # fixed num
+        O(n)            call_set.add(answering[1:4])
+                        call_data[0] += 1
+                    elif " " in answering.strip():  # mobile phone
+        O(n)            call_set.add(answering[0:4])
+                        call_data[1] += 1
+                    else:
+        O(n)            call_set.add(answering[0:3])
+                        call_data[2] += 1
+
+            print("The numbers called by people in Bangalore have codes:")
+O(n log n)  for i in sorted(list(call_set)):
+                print(i)
+
+            percent = round(100.0*call_data[0]/(call_data[0] + call_data[1] + call_data[2]),2)
+            print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(percent))
+
+=> Worst Case Time Complexity is O(n)*O(n) + O(n log n) = O(n^2) (simplification )
+
+4. Task 4
+    Worst Case Time Complexity: O(n^2)
+    Explanation:
+            incoming_set = set()
+            others_set = set()
+
+O(n)        for call in calls:
+    O(n)        incoming_set.add(call[0])
+    O(n)        others_set.add(call[1])
+
+O(n)        for text in texts:
+    O(n)        others_set.add(text[0])
+    O(n)        others_set.add(text[1])
+
+O(len(incoming_set))  ( https://wiki.python.org/moin/TimeComplexity )
+            telemarketers = incoming_set - others_set
+
+            print("These numbers could be telemarketers: ")
+O(n log n)  for i in sorted(list(telemarketers)):
+                print(i)
+
+=> Worst Case Time Complexity is O(n^2) + O(len(incoming_set)) + O(n log n) = O(n^2) (simplification )

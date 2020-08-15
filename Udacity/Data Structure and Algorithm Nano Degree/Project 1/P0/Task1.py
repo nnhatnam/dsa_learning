@@ -11,8 +11,19 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
+phone_set = set()
 
+# First for loop
+for text in texts:
+    phone_set.add(text[0])
+    phone_set.add(text[1])
 
+# Second for loop
+for call in calls:
+    phone_set.add(call[0])
+    phone_set.add(call[1])
+
+print("There are {} different telephone numbers in the records.".format(len(phone_set)))
 
 """
 TASK 1:

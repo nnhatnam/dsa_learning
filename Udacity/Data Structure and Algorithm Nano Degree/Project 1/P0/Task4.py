@@ -12,6 +12,23 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
+incoming_set = set()
+others_set = set()
+
+for call in calls:
+    incoming_set.add(call[0])
+    others_set.add(call[1])
+
+for text in texts:
+    others_set.add(text[0])
+    others_set.add(text[1])
+
+telemarketers = incoming_set - others_set
+
+print("These numbers could be telemarketers: ")
+for i in sorted(list(telemarketers)):
+    print(i)
+
 """
 TASK 4:
 The telephone company want to identify numbers that might be doing
@@ -24,4 +41,3 @@ Print a message:
 <list of numbers>
 The list of numbers should be print out one per line in lexicographic order with no duplicates.
 """
-
