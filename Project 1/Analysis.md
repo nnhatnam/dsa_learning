@@ -5,7 +5,7 @@ The code runs in the same number of lines run regardless size of texts list and 
 Answer:   
 => Time complexity is **O(1)**
 
-###Task1
+### Task1
 
 According to https://wiki.python.org/moin/TimeComplexity, 
 we have the time complexity when adding item to set is O(1).  
@@ -31,7 +31,7 @@ print("{} spent the longest time, {} seconds, on the phone during September 2016
 Answer:  
 => Time complexity is **O(1 + n\*(1+1) + m\*(1+1) + 2)** = **O(2n + 2m + 2)**, simplified to **O(n+m)**
 
-###Task2
+### Task2
 According to https://wiki.python.org/moin/TimeComplexity, 
 we have the time complexity when adding or set item to dictionary is **O(1)**.  
 Call n is the length of `calls`. We have the analysis below
@@ -68,7 +68,7 @@ Answer:
 In `find_longest_call`function, we get the time complexity is **O(n)** (simplified). 
 Because the time complexity of assignment operator is **O(1)** and print function is O(1), the final time complexity is **O(n)** (simplified)
 
-###Taks3
+### Taks3
 
 
 ```python
@@ -123,7 +123,7 @@ Answer:
 In worst case scenario, m = n when all caller phone numbers in calls.csv are always from bangalore and caller phone numbers are never repeat.
 In other word, when len(calls) == len(called_set) == len(called_list), and the time complexity will be **O(n + n log n)** ~ **O(n log n)**
 
-###Task4
+### Task4
 ```python
 incoming_set = set()                                # O(1)
 others_set = set()                                  # O(1)
