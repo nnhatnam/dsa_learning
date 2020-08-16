@@ -26,7 +26,8 @@ for text in texts:
 telemarketers = incoming_set - others_set
 
 print("These numbers could be telemarketers: ")
-for i in sorted(list(telemarketers)):
+telemarketers = sorted(telemarketers)
+for i in telemarketers:
     print(i)
 
 """

@@ -12,28 +12,48 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
-call_set = set()
-call_data = [0, 0, 0]  # fixed , mobile, telemarketers
+
+def is_bangalore_call(phone_number):
+    return phone_number[0:5] == "(080)"
+
+
+def is_fixed_number(phone_number):
+    return phone_number[0] == "("
+
+
+def is_mobile_phone(phone_number):
+    return " " in phone_number.strip()
+
+
+def parse_area_code(phone_number):
+    if is_fixed_number(phone_number):
+        return phone_number.split(')')[0] + ')'
+    elif is_mobile_phone(phone_number):
+        return phone_number[0:4]
+    else:
+        return phone_number[0:3]
+
+
+called_set = set()
+total_call = 0
+answerer_in_bangalore = 0
+
 for call in calls:
-    incoming, answering = call[0], call[1]
+    caller, answerer = call[0], call[1]
 
-    if incoming[0:5] == "(080)":
+    if is_bangalore_call(caller):
+        total_call += 1
+        called_set.add(parse_area_code(answerer))
+        if is_bangalore_call(answerer):
+            answerer_in_bangalore += 1
 
-        if answering[0] == "(":  # fixed num
-            call_set.add(answering[1:4])
-            call_data[0] += 1
-        elif " " in answering.strip():  # mobile phone
-            call_set.add(answering[0:4])
-            call_data[1] += 1
-        else:
-            call_set.add(answering[0:3])
-            call_data[2] += 1
-
+called_list = sorted(called_set)
 print("The numbers called by people in Bangalore have codes:")
-for i in sorted(list(call_set)):
-    print(i)
+for number in called_list:
+    print(number)
 
-percent = round(100.0*call_data[0]/(call_data[0] + call_data[1] + call_data[2]),2)
+
+percent = round(100.0 * answerer_in_bangalore / total_call, 2)
 print("{} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(percent))
 
 """
