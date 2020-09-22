@@ -44,24 +44,26 @@ class BlockChain:
         
         if tail_block is not None:
             print("""
-                                        | Data : {}         |
-                                        | Timestamp : {}    |
-                                        | hash : {}         |
-                                        | previous_hash: {} |
+                                        | Data : {}         
+                                        | Timestamp : {}    
+                                        | hash : {}         
+                                        | previous_hash: {}
                                     """.format(tail_block.data, tail_block.timestamp, tail_block.hash,
                                                tail_block.previous_hash))
             tail_block = tail_block.prev
             while tail_block is not None:
                 print("""
-                                                | Data : {}         |
-                                        <------ | Timestamp : {}    |
-                                                | hash : {}         |
-                                                | previous_hash: {} |
+                                                | Data : {}         
+                                        <------ | Timestamp : {}    
+                                                | hash : {}         
+                                                | previous_hash: {} 
                                     """.format(tail_block.data, tail_block.timestamp, tail_block.hash, tail_block.previous_hash))
                 tail_block = tail_block.prev
 
 
 if __name__ == "__main__":
+
+    #Test 1
     chain = BlockChain()
     chain.append('Test 1')
     time.sleep(0.01)
@@ -70,9 +72,31 @@ if __name__ == "__main__":
     chain.append('Test 3')
     chain.print()
 
-    chain1 = BlockChain()
-    chain1.print()
+    # | Data : Test 3
+    # | Timestamp : {time in utc}
+    # | hash : 4a13e678473eddaa38956c52a185d6389dfcdf60338957dbd4a3c27b4862fa0b
+    # | previous_hash : 32aaca368a545797f698c9422e68692e8c04fc9101a2d749fe4ec929c60992fe
+    #
+    #             | Data : Test 2
+    # < --------- | Timestamp : {time in utc}
+    #             | hash : 32aaca368a545797f698c9422e68692e8c04fc9101a2d749fe4ec929c60992fe
+    #             | previous_hash: 26ea0ae294881f1260ecafec008426894e80bc4d7dc1cd6557ab9169e1a803ee
+    #
+    #             | Data : Test 1
+    # < --------- | Timestamp : {time in utc}
+    #             | hash : 26ea0ae294881f1260ecafec008426894e80bc4d7dc1cd6557ab9169e1a803ee
+    #             | previous_hash: None
 
+    #Test 2
+    chain1 = BlockChain()
+    chain1.print()                  #print nothing
+
+    #Test 3
     chain2 = BlockChain()
-    chain2.append(None)
+    try:
+        chain2.append(None)
+    except Exception as e:
+        print(e)                    #print Data cannot be None
+
+
 

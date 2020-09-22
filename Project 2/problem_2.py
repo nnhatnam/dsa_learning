@@ -28,10 +28,11 @@ def find_files(suffix, path):
             files.extend(find_files(suffix, full_path))
     return files
 
-print(find_files(".c","."))
+if __name__ == "__main__":
+    print(find_files(".c",".")) #print [.\testdir\]
 
-print(find_files("c","."))
+    print(find_files("c","."))
 
-print(find_files(None,"."))
+    print(find_files(None,"."))
 
-print(find_files("",""))
+    print(find_files("",""))
