@@ -40,7 +40,7 @@ class LinkedList:
 def union(llist_1, llist_2):
     # Your Solution Here
 
-    if llist_1.head is None or llist_2.head is None:
+    if llist_1.head is None and llist_2.head is None:
         return LinkedList()
 
     hashmap = dict()
@@ -52,15 +52,11 @@ def union(llist_1, llist_2):
 
     curr = llist_2.head
     while curr is not None:
-        if curr.value in hashmap:  # to avoid duplicate value
-            hashmap[curr.value] = 1
-        else:
-            hashmap[curr.value] = 0
+        hashmap[curr.value] = 0
         curr = curr.next
 
     for key in hashmap:
-        if hashmap[key] == 0:
-            result.append(key)
+        result.append(key)
     return result
 
 
@@ -86,36 +82,79 @@ def intersection(llist_1, llist_2):
     return result
 
 
-# Test case 1
+if __name__ == "__main__":
+    # Test case 1
+    print("Test 1")
+    linked_list_1 = LinkedList()
+    linked_list_2 = LinkedList()
 
-linked_list_1 = LinkedList()
-linked_list_2 = LinkedList()
+    element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
+    element_2 = [6, 32, 4, 9, 6, 1, 11, 21, 1]
 
-element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 21]
-element_2 = [6, 32, 4, 9, 6, 1, 11, 21, 1]
+    for i in element_1:
+        linked_list_1.append(i)
 
-for i in element_1:
-    linked_list_1.append(i)
+    for i in element_2:
+        linked_list_2.append(i)
 
-for i in element_2:
-    linked_list_2.append(i)
+    print("Union")
+    print(union(linked_list_1, linked_list_2))  # 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 21 -> 32 -> 9 -> 1 -> 11 ->
+    print("Intersection")
+    print(intersection(linked_list_1, linked_list_2)) # 6 -> 4 -> 21 ->
 
-print(union(linked_list_1, linked_list_2))
-print(intersection(linked_list_1, linked_list_2))
+    # Test case 2
+    print("Test 2")
+    linked_list_3 = LinkedList()
+    linked_list_4 = LinkedList()
 
-# Test case 2
+    element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
+    element_2 = [1, 7, 8, 9, 11, 21, 1]
 
-linked_list_3 = LinkedList()
-linked_list_4 = LinkedList()
+    for i in element_1:
+        linked_list_3.append(i)
 
-element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
-element_2 = [1, 7, 8, 9, 11, 21, 1]
+    for i in element_2:
+        linked_list_4.append(i)
 
-for i in element_1:
-    linked_list_3.append(i)
+    print("Union")
+    print(union(linked_list_3, linked_list_4)) # 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 23 -> 1 -> 7 -> 8 -> 9 -> 11 -> 21 ->
+    print("Intersection")
+    print(intersection(linked_list_3, linked_list_4)) # nothing
 
-for i in element_2:
-    linked_list_4.append(i)
+    # Test case 3
+    print("Test 3")
+    linked_list_5 = LinkedList()
+    linked_list_6 = LinkedList()
 
-print(union(linked_list_3, linked_list_4))
-print(intersection(linked_list_3, linked_list_4))
+    element_1 = [3, 2, 4, 35, 6, 65, 6, 4, 3, 23]
+    element_2 = []
+
+    for i in element_1:
+        linked_list_5.append(i)
+
+    for i in element_2:
+        linked_list_6.append(i)
+
+    print("Union")
+    print(union(linked_list_5, linked_list_6))  # 3 -> 2 -> 4 -> 35 -> 6 -> 65 -> 23 ->
+    print("Intersection")
+    print(intersection(linked_list_5, linked_list_6))  # nothing
+
+    # Test case 4
+    print("Test 4")
+    linked_list_7 = LinkedList()
+    linked_list_8 = LinkedList()
+
+    element_1 = [3, 2, 4, 35, None, None, 65, 6, 4, 3, 23]
+    element_2 = [3, None, None, None]
+
+    for i in element_1:
+        linked_list_7.append(i)
+
+    for i in element_2:
+        linked_list_8.append(i)
+
+    print("Union")
+    print(union(linked_list_7, linked_list_8))  # 3 -> 2 -> 4 -> 35 -> None -> 65 -> 6 -> 23 ->
+    print("Intersection")
+    print(intersection(linked_list_7, linked_list_8))  # 3 -> None ->

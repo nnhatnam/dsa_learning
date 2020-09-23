@@ -3,13 +3,6 @@ import heapq
 from collections import Counter
 
 
-class PriorityQueue:
-
-    def __init__(self, arr):
-        self.min_heap = heapq.heapify(arr)
-        pass
-
-
 class HuffmanNode:
 
     def __init__(self, char, freq):
@@ -37,7 +30,19 @@ class HuffmanNode:
 class HuffmanTree:
 
     def __init__(self, data):
+        # doesn't make sense if we want to encode 0 or 1 character
+        if len(data) < 2:
+            raise ValueError('Text must be more than 1 character')
         freq_table = Counter(data)
+
+        # in case data only contain 1 char repeatedly such as 'aaaaaaaaaaaaaaaaaa'
+        if len(freq_table) == 1:
+            self.root = HuffmanNode(data[0], freq_table[data[0]])
+            self._encode_dict = {data[0]: "0"}
+            self._decode_dict = {"0": data[0]}
+            return
+
+            # normal case
         nodes = [HuffmanNode(i, freq_table[i]) for i in freq_table]
         heapq.heapify(nodes)
 
@@ -66,8 +71,8 @@ class HuffmanTree:
             return self._decode_dict
 
         self._decode_dict = dict()
-        HuffmanTree._make_decode_dict(self.root, "",  self._decode_dict)
-        return  self._decode_dict
+        HuffmanTree._make_decode_dict(self.root, "", self._decode_dict)
+        return self._decode_dict
 
     @staticmethod
     def _make_encode_dict(node, prefix, encode_dict):
@@ -84,6 +89,7 @@ class HuffmanTree:
         else:
             HuffmanTree._make_decode_dict(node.left, prefix + "1", decode_dict)
             HuffmanTree._make_decode_dict(node.right, prefix + "0", decode_dict)
+
 
 def huffman_encoding(data):
     huffman_tree = HuffmanTree(data)
@@ -108,26 +114,57 @@ def huffman_decoding(data, tree):
 
 
 if __name__ == "__main__":
-    codes = {}
-
+    # Test 0: Udacity Test Case
     a_great_sentence = "The bird is the word"
-    tree = HuffmanTree(a_great_sentence)
-    print(tree.get_encode_dict())
 
-    # print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    # print ("The content of the data is: {}\n".format(a_great_sentence))
-    #
+    print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))  # 45
+    print("The content of the data is: {}\n".format(a_great_sentence))  # The bird is the word
+
     encoded_data, tree = huffman_encoding(a_great_sentence)
-    print(encoded_data)
-    print(tree)
 
+    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))  # 22
+    print("The content of the encoded data is: {}\n".format(encoded_data))
+    # 0001000000010101110011001111010011010010010100000010101111000110011110
 
-    #
-    # print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    # print ("The content of the encoded data is: {}\n".format(encoded_data))
-    #
     decoded_data = huffman_decoding(encoded_data, tree)
-    print(decoded_data)
-    #
-    # print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    # print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))  # 45
+    print("The content of the encoded data is: {}\n".format(decoded_data))
+    # The bird is the word
+
+    # Test 1:
+    print("Test 1")
+    test1_sentence = "mississippi"
+    print("The size of the data is: {}\n".format(sys.getsizeof(test1_sentence)))  # 36
+
+    print("The content of the data is: {}\n".format(test1_sentence))  # mississippi
+    encoded_data, tree = huffman_encoding(test1_sentence)
+
+    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))  # 16
+    print("The content of the encoded data is: {}\n".format(encoded_data))  # 011100001000010100101
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))  # 36
+    print("The content of the encoded data is: {}\n".format(decoded_data))  # mississippi
+
+    # Test 2:
+    print("Test 2")
+    test2_sentence = "111"
+    print("The size of the data is: {}\n".format(sys.getsizeof(test2_sentence)))  # 28
+
+    print("The content of the data is: {}\n".format(test2_sentence))  # 111
+    encoded_data, tree = huffman_encoding(test2_sentence)
+
+    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))  # 12
+    print("The content of the encoded data is: {}\n".format(encoded_data))  # 000
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))  # 28
+    print("The content of the encoded data is: {}\n".format(decoded_data))  # 111
+
+    # Test 3:
+    print("Test 3")
+    test3_sentence = ""
+    encoded_data, tree = huffman_encoding(test3_sentence)  # raise ValueError Text must be more than 1 character
