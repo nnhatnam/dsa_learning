@@ -1,7 +1,5 @@
 class Group(object):
     def __init__(self, _name):
-        if _name is None:
-            raise ValueError('Group name cannot be None')
         self.name = _name
         self.groups = []
         self.users = []
@@ -36,6 +34,9 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
+    if user is None or group is None:
+        return False
+
     if user in group.get_users():
         return True
 
@@ -75,17 +76,10 @@ if __name__ == "__main__":
     child.add_user(another_user)  # print User cannot be None
     print(is_user_in_group(another_user, parent))  # False since another user is None
 
+
     # Test 3
     print("Test 3")
-    parent = Group(None) # raise ValueError Group name cannot be None
-    child = Group("child") # won't execute
-    sub_child = Group("subchild") # won't execute
-
-    sub_child_user = "sub_child_user" # won't execute
-    sub_child.add_user(sub_child_user) # won't execute
-
-    child.add_group(sub_child) # won't execute
-    parent.add_group(child) # won't execute
-
-    print(is_user_in_group(sub_child_user, parent))  # won't execute
-    print(is_user_in_group(sub_child_user, child))  # won't execute
+    another_user = 'another_user'
+    print(is_user_in_group(None, None))  # False
+    print(is_user_in_group(another_user, None))  # False
+    print(is_user_in_group(None, child))  # False

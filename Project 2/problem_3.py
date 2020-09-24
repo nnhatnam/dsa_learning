@@ -31,8 +31,12 @@ class HuffmanTree:
 
     def __init__(self, data):
         # doesn't make sense if we want to encode 0 or 1 character
-        if len(data) < 2:
-            raise ValueError('Text must be more than 1 character')
+        if len(data) == 0:
+            self.root = None
+            self._encode_dict = {}
+            self._decode_dict = {}
+            return
+
         freq_table = Counter(data)
 
         # in case data only contain 1 char repeatedly such as 'aaaaaaaaaaaaaaaaaa'
@@ -166,5 +170,32 @@ if __name__ == "__main__":
 
     # Test 3:
     print("Test 3")
-    test3_sentence = ""
-    encoded_data, tree = huffman_encoding(test3_sentence)  # raise ValueError Text must be more than 1 character
+    test3_sentence = "a"
+    encoded_data, tree = huffman_encoding(test3_sentence)
+
+    print("The size of the data is: {}\n".format(sys.getsizeof(test3_sentence)))  # 26
+
+    print("The content of the data is: {}\n".format(test3_sentence))  # a
+    encoded_data, tree = huffman_encoding(test3_sentence)
+
+    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))  # 12
+    print("The content of the encoded data is: {}\n".format(encoded_data))  # 0
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))  # 26
+    print("The content of the encoded data is: {}\n".format(decoded_data))  # a
+
+    # Test 4:
+    print("Test 4")
+    test4_sentence = ""
+    encoded_data, tree = huffman_encoding(test4_sentence)
+
+    print("The content of the data is: {}\n".format(test4_sentence))  # empty string
+    encoded_data, tree = huffman_encoding(test4_sentence)
+
+    print("The content of the encoded data is: {}\n".format(encoded_data))  # empty string
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+
+    print("The content of the encoded data is: {}\n".format(decoded_data))  # empty string

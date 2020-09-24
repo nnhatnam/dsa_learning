@@ -59,10 +59,10 @@ The `BlockChain` class is implemented similarly to a singly linked list. The dif
 head, we are tracking the tail, and when we add a new block, it will be added at the tail
 
  ### Time complexity
-The time complexity for adding new block is O(1) 
+The time complexity is O(n)
 
 ### Space complexity
-The space complexity for adding new block is also O(1) 
+The space complexity is O(n)
 
 ## Problem 6 (Union and Intersection)
 To implement the union and intersection problems, I use a hash map. The idea is that we traverse on two linked lists. 

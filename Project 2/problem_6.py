@@ -158,3 +158,22 @@ if __name__ == "__main__":
     print(union(linked_list_7, linked_list_8))  # 3 -> 2 -> 4 -> 35 -> None -> 65 -> 6 -> 23 ->
     print("Intersection")
     print(intersection(linked_list_7, linked_list_8))  # 3 -> None ->
+
+    # Test case 5 - Two empty linked lists
+    print("Test 5")
+    linked_list_7 = LinkedList()
+    linked_list_8 = LinkedList()
+
+    element_1 = []
+    element_2 = []
+
+    for i in element_1:
+        linked_list_7.append(i)
+
+    for i in element_2:
+        linked_list_8.append(i)
+
+    print("Union")
+    print(union(linked_list_7, linked_list_8))  # print nothing
+    print("Intersection")
+    print(intersection(linked_list_7, linked_list_8))  # print nothing

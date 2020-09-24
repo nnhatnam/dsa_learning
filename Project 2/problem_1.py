@@ -4,14 +4,19 @@ from collections import OrderedDict
 class LRUCache(object):
 
     def __init__(self, capacity=5):
+
         if capacity < 1:
-            raise ValueError("Capacity cannot less than 1")
+            self.capacity = capacity
+            print("Capacity cannot less than 1")
+            return
         self.capacity = capacity
         self.cache = OrderedDict()
         # Initialize class variables
 
     def get(self, key):
         # Retrieve item from provided key. Return -1 if nonexistent.
+        if self.capacity < 1:
+            return -1
         value = -1
         if key in self.cache:
             value = self.cache.pop(key)
@@ -20,6 +25,9 @@ class LRUCache(object):
 
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
+        if self.capacity < 1:
+            print('Cannot set value for a cache with capacity = {}'.format(self.capacity))
+            return
         if key is None:
             print("Key cannot be None. The data will not be added")
             return
@@ -83,4 +91,11 @@ if __name__ == "__main__":
 
     # Test 3
     print("Test 3")
-    our_cache = LRUCache(0)  # raise ValueError Capacity cannot less than 1
+    our_cache = LRUCache(0)  # print Capacity cannot less than 1
+    our_cache.get(1)  # -1
+    our_cache.set(1, 1)  # print Cannot set value for a cache with capacity = 0
+
+    # Test 4
+    print("Test 4")
+    our_cache = LRUCache(-1)  # print Capacity cannot less than 1
+    our_cache.set(1, 1)  # print Cannot set value for a cache with capacity = -1
