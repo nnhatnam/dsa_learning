@@ -39,6 +39,9 @@ class BlockChain:
             self.tail = new_block
         self.size += 1
 
+    def get_size(self):
+        return self.size
+
     def print(self):
 
         tail_block = self.tail
@@ -72,6 +75,7 @@ if __name__ == "__main__":
     chain.append('Test 2')
     time.sleep(0.01)
     chain.append('Test 3')
+    print(chain.get_size()) # 3
     chain.print()
 
     # | Data : Test 3
@@ -97,6 +101,7 @@ if __name__ == "__main__":
     chain.append('Test 4')
     chain.append('Test 5')
     chain.append('Test 6')
+    print(chain.get_size())  # 6
     chain.print()
     # | Data : Test 6
     # | Timestamp : {time in utc}

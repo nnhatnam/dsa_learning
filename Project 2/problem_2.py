@@ -32,8 +32,12 @@ def find_files(suffix, path):
 
 
 if __name__ == "__main__":
-    print(find_files(".c", "."))
-    # ['.\testdir\subdir1\a.c', '.\testdir\subdir3\subsubdir1\b.c', '.\testdir\subdir5\a.c', '.\testdir\t1.c']
+    for file in find_files(".c", "."):
+        print(file)
+    # .\testdir\subdir1\a.c
+    # .\testdir\subdir3\subsubdir1\b.c
+    # .\testdir\subdir5\a.c
+    # .\testdir\t1.c
 
     print(find_files("c", "."))
     # [] - suffix is not value
@@ -44,9 +48,16 @@ if __name__ == "__main__":
     print(find_files("", None))
     # [] - path is None
 
-    print(find_files(".h", "."))
-    # ['.\testdir\subdir1\a.h', '.\testdir\subdir3\subsubdir1\b.h', '.\testdir\subdir5\a.h', '.\testdir\t1.h']
+    for file in find_files(".h", "."):
+        print(file)
+    # .\testdir\subdir1\a.h
+    # .\testdir\subdir3\subsubdir1\b.h
+    # .\testdir\subdir5\a.h
+    # .\testdir\t1.h
 
-    print(find_files(".h", ".."))
-    # ['..\Project 2\testdir\subdir1\a.h', '..\Project 2\testdir\subdir3\subsubdir1\b.h',
-    # '..\Project 2\testdir\subdir5\a.h', '..\Project 2\testdir\t1.h']
+    for file in find_files(".h", ".."):
+        print(file)
+    # ..\Project 2\testdir\subdir1\a.h
+    # ..\Project 2\testdir\subdir3\subsubdir1\b.h
+    # ..\Project 2\testdir\subdir5\a.h
+    # ..\Project 2\testdir\t1.h
