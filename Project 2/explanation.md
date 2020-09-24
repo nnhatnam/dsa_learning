@@ -37,7 +37,7 @@ it does several steps:
 4. Build the tree by repeatedly merging two least frequency nodes until we have only one node in the array (take `O(m*log(m))` time)
 
 ### Time complexity
-According to the steps above, the time complexity of building a HuffmanTree is `O(n*nlog(n))`    
+According to the steps above, the time complexity of building a HuffmanTree is `O(n*log(n))`    
 
 ### Space complexity
 The space complexity is O(n)

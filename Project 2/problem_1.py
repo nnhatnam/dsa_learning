@@ -32,7 +32,7 @@ class LRUCache(object):
             print("Key cannot be None. The data will not be added")
             return
         if key in self.cache:
-            value = self.cache.pop(key)
+            self.cache.pop(key)
             self.cache[key] = value
         else:
             cache_size = len(self.cache)
@@ -92,10 +92,18 @@ if __name__ == "__main__":
     # Test 3
     print("Test 3")
     our_cache = LRUCache(0)  # print Capacity cannot less than 1
-    our_cache.get(1)  # -1
+    print(our_cache.get(1))  # -1
     our_cache.set(1, 1)  # print Cannot set value for a cache with capacity = 0
 
     # Test 4
     print("Test 4")
     our_cache = LRUCache(-1)  # print Capacity cannot less than 1
     our_cache.set(1, 1)  # print Cannot set value for a cache with capacity = -1
+
+    # Test 5 -  Test bugs given by Udacity mentor
+    print("Test 5")
+    our_cache = LRUCache(5)
+    our_cache.set(1, 1)
+    print(our_cache.get(2))  # returns -1
+    our_cache.set(1, 11111)
+    print(our_cache.get(1))  # overriding a value, returns 11111

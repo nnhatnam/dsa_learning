@@ -17,11 +17,19 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
-    if suffix == '' or suffix is None or suffix[0] != "." or not os.path.isdir(path):
-        return []
+
     files = []
-    for p in os.listdir(path):
-        full_path = os.path.join(path, p)
+    if suffix == '' or suffix is None or suffix[0] != "." or not os.path.exists(path):
+        return files
+
+
+    # Fix bug given by Udacity mentor
+    dir = path
+    if os.path.isfile(dir) and os.access(dir, os.R_OK):
+        dir = os.path.split(dir)[0]
+
+    for p in os.listdir(dir):
+        full_path = os.path.join(dir, p)
 
         if os.path.isfile(full_path):
             if p.endswith(suffix):
@@ -61,3 +69,32 @@ if __name__ == "__main__":
     # ..\Project 2\testdir\subdir3\subsubdir1\b.h
     # ..\Project 2\testdir\subdir5\a.h
     # ..\Project 2\testdir\t1.h
+
+    # Test bugs given by Udacity mentor
+    print("Test bug")
+    path = "./ex.py"
+    suffix = ".py"
+    for file in find_files(suffix, path):
+        print(file)
+    # .\ex.py
+    # .\problem_1.py
+    # .\problem_2.py
+    # .\problem_3.py
+    # .\problem_4.py
+    # .\problem_5.py
+    # .\problem_6.py
+    # .\testdir\t1.py
+
+    print("Test bug 2")
+    path = "./this_is_a_file"
+    suffix = ".py"
+    for file in find_files(suffix, path):
+        print(file)
+    # .\ex.py
+    # .\problem_1.py
+    # .\problem_2.py
+    # .\problem_3.py
+    # .\problem_4.py
+    # .\problem_5.py
+    # .\problem_6.py
+    # .\testdir\t1.py
