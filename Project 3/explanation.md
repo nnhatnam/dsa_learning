@@ -18,3 +18,17 @@ The time complexity is `O(log(n))`
 
 ### Space complexity
 The space complexity is `O(1)` 
+
+## Problem 3 (Rearrange Array Elements)
+If we assume the array is sorted in descending order, a way to form two numbers that satisfies the given problem is form the first 
+number by even index (O-based), and the second number by odd index. For example, [9, 8 , 7 , 6, 5] => 975 and 86. In this 
+particular problem, sorting doesn't allowed, but we can use *heap* data structure to accomplish the same result. The idea is 
+turn the array into a max-heap (or min-heap) then keep popping the root to form the two numbers until the array is empty. 
+
+### Time complexity
+Calling heapq.heapify cost O(n), and heapq.heappop cost O(log(n)). We call heappop n times (where n is the length of the array).
+So, The time complexity is `O(n*log(n))`
+
+### Space complexity
+The space complexity is `O(1)` 
+

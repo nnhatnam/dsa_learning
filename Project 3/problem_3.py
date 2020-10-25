@@ -34,6 +34,20 @@ def _test_function(test_case):
         print("Fail")
 
 
-print(rearrange_digits([1, 2, 3, 4, 5]))
-_test_function([[1, 2, 3, 4, 5], [542, 31]])
-_test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
+if __name__ == "__main__":
+    # Udacity test cases
+    _test_function([[1, 2, 3, 4, 5], [542, 31]])
+    _test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
+
+    # Test 1: array is empty
+    _test_function([[], [0, 0]])
+
+    # Test 2: array has 1 element
+    _test_function([[1], [1, 0]])
+
+    # Test 3: array has 2 element
+    _test_function([[1, 2], [1, 2]])
+
+    # Test 4: others
+    _test_function([[9, 8, 7, 6, 5], [975, 86]])
+    _test_function([[5, 6, 7, 9, 8], [975, 86]])
