@@ -32,3 +32,17 @@ So, The time complexity is `O(n*log(n))`
 ### Space complexity
 The space complexity is `O(1)` 
 
+## Problem 4 (Dutch National Flag Problem)
+After the array is sorted, we have three parts in the array: left part is 0, middle part is 1 and right part is 2. Say **i**  
+is the partition between left and middle part (0 and 1), and **k** is the partition between middle and right part (1 and 2). An 
+idea to resolve this problem is. 
+1. Initialize **i** , **k** as a pointer to the beginning and the end of the input_list respectively
+2. Have a pointer **j** traverses through the **input_list**. For each number in **input_list**, if the number < 1, we want 
+it on the left part, so we move it before **i**. If the number = 0, we want it stay between **i** and **k**, so we do nothing.
+If the number > 1, we want it on the right part, so we move it after **k**  
+
+### Time complexity
+It's single traverse, so the time complexity is O(n)
+
+### Space complexity
+The space complexity is `O(1)` since we only use three extra variables.
