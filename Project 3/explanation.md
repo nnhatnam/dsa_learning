@@ -68,5 +68,15 @@ where V is the number of the vertices and E is the number of the edges.
 The space complexity of:
 - `TrieNode.insert` is `O(1)`
 - `TrieNode.suffixes` is `O(b*m)` where m is the length of the longest path and b is the number of the branches to travel
-- `Trie.insert` is O(n)
-- `Trie.find` is O(1)
+- `Trie.insert` is `O(n)`
+- `Trie.find` is `O(1)`
+
+## Problem 6 (Max and Min in a Unsorted Array)
+Declare two variables for tracking the min and max of the array. Scan through the list, compare each number to the min and max 
+ variables, and re-assign the min and max if needed 
+
+### Time complexity
+The space complexity is `O(n)` 
+
+### Space complexity
+The space complexity is `O(1)` 
