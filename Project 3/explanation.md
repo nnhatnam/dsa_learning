@@ -42,7 +42,31 @@ it on the left part, so we move it before **i**. If the number = 0, we want it s
 If the number > 1, we want it on the right part, so we move it after **k**  
 
 ### Time complexity
-It's single traverse, so the time complexity is O(n)
+It's single traverse, so the time complexity is `O(n)`
 
 ### Space complexity
 The space complexity is `O(1)` since we only use three extra variables.
+
+## Problem 5 (Building a Trie in Python)
+This problem is about following definition and instructions to build a Trie. So, it's not many things to say about design choices
+or algorithms.  
+- TrieNode operation:  
+    -  ``insert(self, char)`` : Add a child node represent the letter ``char`` to the node
+    - ``suffixes(self, suffix = '')`` : Recursive function that collects the suffix for all complete words below this point
+- Trie function:
+    - `insert(self, word):`  : Add a word to the Trie
+    - `find(self, prefix)` : Find the Trie node that represents this prefix
+
+### Time complexity
+- `TrieNode.insert` operation has time complexity is `O(1)` since insert a new key into dictionary cost `O(1)`
+- `TrieNode.suffixes` operation is implemented using Depth-first search algorithms, so the time complexity is O(V + E) 
+where V is the number of the vertices and E is the number of the edges. 
+- `Trie.insert` operation has time complexity is `O(n)` where n is the length of the word
+- `Trie.find` operation has time complexity is `O(n)` where n is the length of the word
+
+### Space complexity
+The space complexity of:
+- `TrieNode.insert` is `O(1)`
+- `TrieNode.suffixes` is `O(b*m)` where m is the length of the longest path and b is the number of the branches to travel
+- `Trie.insert` is O(n)
+- `Trie.find` is O(1)
