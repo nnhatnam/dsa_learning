@@ -80,3 +80,18 @@ The space complexity is `O(n)`
 
 ### Space complexity
 The space complexity is `O(1)` 
+
+## Problem 7 (HTTPRouter using a Trie)
+`RouteTrie` and `RouteTrieNode` are implemented conceptually the same way as `Trie` and `TrieNode` in problem 5. This problem 
+also has class `Router`  with two operations `add_handler` and `lookup`. `add_handler` simply calls `RoutTrie.insert` and `lookup` 
+calls `RoutTrie.find`
+
+### Time complexity
+The time complexity of:
+- `add_handler` is `O(n)` where n is the number of path parts
+- `lookup` is `O(n)` where n is the number of path parts
+
+### Space complexity
+The space complexity is `O(1)` 
+- `add_handler` is `O(n)` where n is the number of path parts
+- `lookup` is `O(1)` 
