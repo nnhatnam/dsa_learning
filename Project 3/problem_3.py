@@ -11,18 +11,76 @@ def rearrange_digits(input_list):
        (int),(int): Two maximum sums
     """
     l = len(input_list)
-    n1, n2 = 0, 0
-    heapq.heapify(input_list)
+    lo, hi = 0, len(input_list) - 1
 
-    unit = 1  # use unit because heapify is min heap 
-    for i in range(l // 2):
-        n1 = n1 + heapq.heappop(input_list) * unit
-        n2 = n2 + heapq.heappop(input_list) * unit
-        unit = unit * 10
+    # case [1] => [1, 0]
+    if lo == hi:
+        return [input_list[lo], 0]
 
-    if l & 1 == 1:  # if len is odd
-        n1 = n1 + heapq.heappop(input_list) * unit
-    return [n1, n2]
+    # case [8, 9] => [8, 9]
+    if hi - lo == 1:
+        return input_list
+
+    mid = lo + (hi - lo) // 2
+    left = merge_sort_desc(input_list, lo, mid)
+    right = merge_sort_desc(input_list, mid + 1, hi)
+
+    i, j = 0, 0
+
+
+
+# n1, n2 = 0, 0
+#     heapq.heapify(input_list)
+#
+#     unit = 1  # use unit because heapify is min heap
+#     for i in range(l // 2):
+#         n1 = n1 + heapq.heappop(input_list) * unit
+#         n2 = n2 + heapq.heappop(input_list) * unit
+#         unit = unit * 10
+#
+#     if l & 1 == 1:  # if len is odd
+#         n1 = n1 + heapq.heappop(input_list) * unit
+#     return [n1, n2]
+
+def merge_sort_desc(arr, lo, hi):
+
+    if lo == hi:
+        return [arr[lo]]
+
+    if hi - lo == 1:
+        if arr[lo] > arr[hi]:
+            return [arr[lo], arr[hi]]
+        else:
+            return [arr[hi], arr[lo]]
+
+    mid = lo + (hi - lo) // 2
+    left = merge_sort_desc(arr, lo, mid)
+    right = merge_sort_desc(arr, mid + 1, hi)
+
+    # merge step
+    result = []
+    i , j = 0 , 0
+    while i < len(left) or j < len(right):
+        if i == len(left):
+            result.append(right[j])
+            j += 1
+        elif j == len(right):
+            result.append(left[i])
+            i += 1
+        else:
+            if i < len(left) and left[i] > right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+
+    return result
+
+
+def merge(arr1, arr2):
+    p1 = 0
+    p2 = 0
 
 
 def _test_function(test_case):
@@ -35,6 +93,7 @@ def _test_function(test_case):
 
 
 if __name__ == "__main__":
+    print(merge_sort_desc([4, 6, 2, 5, 9, 8], 0, 5))
     # Udacity test cases
     _test_function([[1, 2, 3, 4, 5], [542, 31]])
     _test_function([[4, 6, 2, 5, 9, 8], [964, 852]])
